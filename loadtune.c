@@ -139,9 +139,7 @@ void main(int argc, char ** argv)
 	while(1) {
 		lt_debug("current load average: %f.\n", get_loadavg());
 		lt_debug("target load average: %f.\n", loadtune);
-		if (get_loadavg() < loadtune) {
 			tune_proc_start();
-		}
 	}
 
 	return;
