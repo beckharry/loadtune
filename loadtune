@@ -9,18 +9,16 @@ if [ "$1" == "start" ]; then
 	killall loadtune-daemon &> /dev/null
 	/bin/loadtune-daemon $target &
 	echo "Start loadtune-daemon successfully."
-fi
-
-if [ "$1" == "stop" ]; then
+elif [ "$1" == "stop" ]; then
 	killall loadtune-daemon
 	echo "Stop loadtune-daemon successfully."
-fi
-
-if [ "$1" == "status" ]; then
+elif [ "$1" == "status" ]; then
 	process=`ps aux | grep loadtune-daemon | wc -l`
 	if [ $process -eq 2 ]; then
 		echo "loadtune-daemon is running..."
 	else
 		echo "loadtune-daemon is stopped."
 	fi
+else
+	echo "usage: loadtune {start|stop|status}"
 fi
