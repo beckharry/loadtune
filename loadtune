@@ -1,24 +1,24 @@
 #!/bin/bash
 if [ $# -eq 0 ]; then
 	echo "usage: loadtune {start|stop|status}"
-fi
-
-if [ "$1" == "start" ]; then
-	printf "Input the target loadavg value[0~1]: "
-	read target
-	killall loadtune-daemon &> /dev/null
-	/bin/loadtune-daemon $target &
-	echo "Start loadtune-daemon successfully."
-elif [ "$1" == "stop" ]; then
-	killall loadtune-daemon
-	echo "Stop loadtune-daemon successfully."
-elif [ "$1" == "status" ]; then
-	process=`ps aux | grep loadtune-daemon | wc -l`
-	if [ $process -eq 2 ]; then
-		echo "loadtune-daemon is running..."
-	else
-		echo "loadtune-daemon is stopped."
-	fi
 else
-	echo "usage: loadtune {start|stop|status}"
+	if [ "$1" == "start" ]; then
+		printf "Input the target loadavg value[0~1]: "
+		read target
+		killall loadtune-daemon &> /dev/null
+		/bin/loadtune-daemon $target &
+		echo "Start loadtune-daemon successfully."
+	elif [ "$1" == "stop" ]; then
+		killall loadtune-daemon
+		echo "Stop loadtune-daemon successfully."
+	elif [ "$1" == "status" ]; then
+		process=`ps aux | grep loadtune-daemon | wc -l`
+		if [ $process -eq 2 ]; then
+			echo "loadtune-daemon is running..."
+		else
+			echo "loadtune-daemon is stopped."
+		fi
+	else
+		echo "usage: loadtune {start|stop|status}"
+	fi
 fi
